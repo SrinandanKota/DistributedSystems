@@ -1,0 +1,12 @@
+module ES{
+ 	interface end{
+ 		
+ 		void view_auction(in string username, out string c);
+		void sell(in string username, in string itemname,in long price, out string c);
+        void bid(in string username, in long price, out string c);
+        void view_high_bidder(in string username,out string name, out string c);
+        void view_bid(in string username, out string output);
+        void offer_item(in string username, in string itemname,in long price, out string c);
+ 	};
+
+};
