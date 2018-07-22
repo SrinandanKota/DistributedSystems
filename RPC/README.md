@@ -1,4 +1,4 @@
-Exrecise System in SUN RPC : Remote Procedure Call 
+Exercise, System in SUN RPC : Remote Procedure Call 
 
 The objective of the machine problem is to write a network management application that tracks user logins, CPU usage and other statistics
 on a host and allows querying by a RPC-based network management system. Its output can be used to feed into an analysis component for
@@ -15,5 +15,5 @@ get the current system statistics of the server machine. It tracks, for example:
 The running system will consist of client and server program. The platform used are the UNIX/Linux workstations, and is developed in C
 programming language.
 
-The program prints all the statistics of the host system and it's output is used to analyse and further take decisions to correct or
+The program prints all the statistics of the host system and it's output can be used to analyse and further take decisions to correct or
 monitor host.  
