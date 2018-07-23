@@ -23,15 +23,14 @@ public class Banker {
 	
 	String aHash;			//Alice Hash
 	String bHash;			//Bob Hash
-	String x;				//Alice random number
-	String y;				//Bob  random number
+	String x;			//Alice random number
+	String y;			//Bob  random number
 	String aBetAmount;		//Alice bet amount
 	String bBetAmount;		//Bob bet amount
 	
 
 	public void setaHash(String aHash) {
 		this.aHash = aHash;
-		
 		//store the x value for round 2
 		FileWriter f_w = null;
 		BufferedWriter b_w = null;
@@ -44,7 +43,7 @@ public class Banker {
 		    out.println(aHash);
 		    out.close();
 		} catch (IOException e) {
-			//left as exercise for reader
+			// System.err.println("Caught IOException: " + e.getMessage());
 		}
 		
 	}
@@ -63,7 +62,7 @@ public class Banker {
 				    out.println(bHash);
 				    out.close();
 				} catch (IOException e) {
-					//left as exercise for reader
+					// System.err.println("Caught IOException: " + e.getMessage());
    				}
 		
 	}
@@ -119,12 +118,12 @@ public class Banker {
 		String yValue=this.y;
 		
 		FileInputStream fstream = new FileInputStream("aHash.txt");
-        BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
-        String aHash=br.readLine();
+        	BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
+        	String aHash=br.readLine();
         
-        FileInputStream fystream = new FileInputStream("bHash.txt");
-        BufferedReader btr = new BufferedReader(new InputStreamReader(fystream));
-        String bHash=btr.readLine();
+        	FileInputStream fystream = new FileInputStream("bHash.txt");
+        	BufferedReader btr = new BufferedReader(new InputStreamReader(fystream));
+        	String bHash=btr.readLine();
 			
 		
 		//check if hashes are consistent
@@ -169,14 +168,14 @@ public class Banker {
 		
 		//get x and y values from Alice and Bob
 		FileInputStream f1stream = new FileInputStream("Alicefile.txt");
-        BufferedReader br = new BufferedReader(new InputStreamReader(f1stream));
-        String line=br.readLine();
-        banker.setX(line);
+        	BufferedReader br = new BufferedReader(new InputStreamReader(f1stream));
+        	String line=br.readLine();
+        	banker.setX(line);
 		
 		FileInputStream fastream = new FileInputStream("Bobfile.txt");
-        BufferedReader bbr = new BufferedReader(new InputStreamReader(fastream));
-        String bline=bbr.readLine();
-        banker.setY(bline);
+        	BufferedReader bbr = new BufferedReader(new InputStreamReader(fastream));
+        	String bline=bbr.readLine();
+        	banker.setY(bline);
 		
 		
 		//Operations of Banker		
