@@ -28,24 +28,30 @@ and restarted.
 may be built, one for a Seller and another for a Bidder.
 3. Errors, server exceptions, and invalid user input shall produce reasonably informative error displays to the user.
 4. Note that for this phase of the project, a single IDL interface Auction is sufficient. This interface should contain the
-exception declarations, attribute declarations, and all of the operations interfaces that specify the functionality described
+exception declarations, attribute declarations, and all of the interfaces for the operations that specify the functionality described
 for the Seller and the Bidder.
 5. Client and Server shall be deployed on at least two different machines. It is acceptable for the client to be replicated
 on additional machines. Client and Server shall not operate out of the same directory. The Client environment shall not
 contain unnecessary Server components.
 6. The Seller and Bidder roles should provide the functionality specified by the following use case scenarios:
+
 – Offer-Item: If the auction is currently empty, any user may offer an item for sale by providing a user ID, an item
 description, and an optional initial price. The initial price becomes the current price. This operation is not permitted
 if the auction is currently busy.
+
 – Sell: If at least one Bid has been accepted, the Seller may sell the item at the current price. The actual sales transaction
 is assumed to take place outside the scope of the Auction. The Seller must identify itself by providing the same
 userID that was used in the offer-item operation.
+
 – Bid: Any user, other than the seller, may place a bid on the current item by supplying a user ID and a bid price. If
 the price bid is higher than the current price, the bidder becomes the current high bidder, and the price becomes the
 current price.
+
 – view-high-bidder: The identity of the current high bidder, if any, is viewable only to the current Seller.
+
 – view-bid-status: A bidder can determine at any time whether it is the current high bidder. This operation will fail if
 the auction is not currently active (no item is currently for sale, or the current item is already sold).
+
 – view-auction-status: Any user may view the status of the auction. Status includes auction state (empty/active), and
 if the auction is active, the description of current item and current price. The identity of the current high bidder is
 viewable only to the seller.
