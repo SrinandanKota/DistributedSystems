@@ -14,7 +14,7 @@ among each other; Phase II project aims to develop a simple two-party online Coi
 
 III. PHASE I
 
-The first phase of the project is intended to familiarize you with the Stellar platform and learn the process of building user accounts.
+The first phase of the project familiarizes you with the Stellar platform and helps you learn the process of building user accounts.
 Most distributed applications interact with the Stellar network through Horizon, a RESTful HTTP API server. The detailed information of
 Horizon can be learned by following the links in Section V. This phase will create two accounts, with which users transfer lumens
 (funds) to each other. 
@@ -31,7 +31,7 @@ funds to the targeted account.
 
 IV. PHASE II
 
-This phase implements a two-party distributed Coin Flipping game. We start by a simplified coin flipping" game: Alice and Bob want to
+This phase implements a two-party distributed Coin Flipping game. We start by a simplified "coin flipping" game: Alice and Bob want to
 bet ten dollars. They both agree to the bet ahead of time and the method for determining the winner. Bob will flip a coin in the air,
 and while it is rotating Alice calls out "Head" or "Tail". When the coin lands, they both immediately have a clear understanding of
 who won the bet, and they both have assurance that the outcome was random and that neither of them was able to influence the outcome.
@@ -41,15 +41,7 @@ same time. Also, both parties still have to trust that whoever loses will pay up
 on-line coin  flipping game that is not only just as "fair", but also the problem of making sure that the loser actually pays, with the
 support of implementation of Stellar.
 
-The first challenge is replacing the "coin flip" mechanism with some online equivalent. Let's say we now have two parties, Alice and Bob, who all want to select a number with equal probability. Here's one attempt at such a
-protocol. Each of them picks a random number, e.g. Alice chooses 0, Bob chooses 1. They tell each other their numbers, and they combine
-the output as val = 00; 01; 10 or 11. Alice (first participant) wins if val = 00 or 11 (i.e., two numbers are the same). Otherwise, Bob
-(second participant) wins (if val = 01 or 10 (i.e., two numbers are different)). If both of them chose their random numbers independently
-, this would indeed work. But remember that we are doing this over the Internet, and there is no way to ensure that they all send their
-numbers "simultaneously". Alice might wait until she hears Bob's numbers before broadcasting hers. If she does this, you can see how it
-is trivial for her to make the final output be whatever she wants. We cannot design the protocol to convince every party involved that
-none of the other parties can cheat. To solve this problem, one possible solution is that we can use hash commitments by following the
-two-round protocol below:
+The first challenge is replacing the "coin flip" mechanism with some online equivalent. Let's say we now have two parties, Alice and Bob, who all want to select a number with equal probability. Here's one attempt at such a protocol. Each of them picks a random number, e.g. Alice chooses 0, Bob chooses 1. They tell each other their numbers, and they combine the output as val = 00; 01; 10 or 11. Alice (first participant) wins if val = 00 or 11 (i.e., two numbers are the same). Otherwise, Bob (second participant) wins (if val = 01 or 10 (i.e., two numbers are different)). If both of them chose their random numbers independently, this would indeed work. But remember that we are doing this over the Internet, and there is no way to ensure that they all send their numbers "simultaneously". Alice might wait until she hears Bob's numbers before broadcasting hers. If she does this, you can see how it is trivial for her to make the final output be whatever she wants. We cannot design the protocol to convince every party involved that none of the other parties can cheat. To solve this problem, one possible solution is that we can use hash commitments by following the two-round protocol below:
 
 Round 1: Each participant chooses a random number by calling appropriate random number generation function (most program languages like
 C and Java provide such functions). For example, Alice first picks x and Bob picks y, independently. Then each participant feeds her/his
@@ -62,15 +54,31 @@ participants are consistent with the committed H(x) and H(y) in Round 1, respect
 who is the winner of the game by calculating ((x+y) mod 2). If the result is 0, Alice is the winner. Otherwise, Bob is the winner. Doing
 so will guarantee no one can cheat, assuming we use a reliable hash function. At the end of the game, 95% of the deposits from both
 parties will be sent to the winner from the banker, the remaining 5% will be retained by the banker as a service fee. This round of the
-game will end. Such game can be repeated many many rounds.
+game will end. Such games can be repeated many many rounds.
 
-Some of the requirements:
+The code has the following features:
 
-1. Implement the banker program that can store and update the game transactions. When the banker wants to query the activity history, the
-system should provide the game transaction records within one day.
-2. There are two user roles: participants and banker. A separate User Interface is required to each role/particpant. Only one active game
-at a time needs to be supported. At any given time, there may be at most one banker and at least two participants active with respect to
+1. Implements the banker program that can store and update the game transactions. When the banker wants to query the activity history, the system provides the game transaction records within one day.
+
+2. There are two user roles: participants and banker. A separate User Interface is implemented for each role/particpant. Only one active game at a time is supported. At any given time, there is at most one banker and at least two participants active with respect to
 a given round of game.
+
+Information about the files in this folder-
+
+
+For the first phase:
+
+  1)	Account.java creates the account and has user interface to query the account ID and the amount
+  2)	SendLumen.java allows the user to send money to a particular account
+  3)	ReceiveLumen.java allows the user to check account activity of any account 
+  
+For the second phase:
+
+  1)	Alice.java is run for sending hash value and the amount to the banker program
+  2)	Bob.java is run for sending hash value and the amount to the banker program
+  3)	Banker.java is run for determining the winner and transferring the funds
+
+The entire project has been implemented using the Java in the Eclipse IDE.
 
 V. Useful links
 
